@@ -3,11 +3,12 @@ import "./home.css"
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
 import { Link } from "react-router-dom";
+import MovieList from "../../components/movieList/movieList";
 
 
 const Home =() => {
 
-    const [ popularMoves, setPopularMovies ] = useState([])
+    const [ popularMovies, setPopularMovies ] = useState([])
 
     useEffect(() => {
         fetch("https://api.themoviedb.org/3/movie/popular?api_key=be1c60a055d5852c0311db379d9b6df6&language=en-US&page=1")
@@ -25,7 +26,7 @@ const Home =() => {
                     showStatus={false}
                 >
                     {
-                        popularMoves.map(movie => (
+                        popularMovies.map(movie => (
                             <Link style={{textDecoration:"none",color:"white"}} to={`/movie/${movie.id}`} >
                             <div className="posterImage">
                                 <img src={`https://image.tmdb.org/t/p/original${movie && movie.backdrop_path}`} />
@@ -45,6 +46,7 @@ const Home =() => {
                         ))
                     }
                 </Carousel>
+                <MovieList/>
            </div>
         </>
     )
